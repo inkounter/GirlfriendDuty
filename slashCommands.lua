@@ -5,7 +5,7 @@ local thisAddonName, namespace = ...
 SLASH_GIRLFRIENDDUTY1 = "/gfd"
 SlashCmdList["GIRLFRIENDDUTY"] = function(msg)
     if msg == "test" or msg == "" then
-        namespace.alertFrame:Show()
+        namespace.alertFrame:fireAlert()
         print("|cffFF3377[Girlfriend Duty]|r: Test alert displayed.")
     elseif msg == "clear" then
         GirlfriendDutyDB.cooldownExpiry = 0

@@ -4,7 +4,15 @@ local thisAddonName, namespace = ...
 
 local lastDifficultyId = 0
 
-local eventHandler = {
+local EventHandlerMixin = {
+    ["fireAlert"] = function(self)
+        if not self:IsShown() then
+            GirlfriendDutyDB.alertActive = true
+            PlaySound(8960, "Master")   -- Play ready check sound
+            self:Show()
+        end
+    end,
+
     ["_tryFireAlert"] = function(self)
         -- Show the alert frame if we're not on cooldown.
 
@@ -14,7 +22,7 @@ local eventHandler = {
             return
         end
 
-        namespace.alertFrame:Show()
+        self:fireAlert()
     end,
 
     ["_ADDON_LOADED"] = function(self, addonName)
@@ -22,7 +30,7 @@ local eventHandler = {
             return
         end
 
-        namespace.alertFrame:UnregisterEvent("ADDON_LOADED")
+        self:UnregisterEvent("ADDON_LOADED")
 
         GirlfriendDutyDB = GirlfriendDutyDB or {}
 
@@ -30,7 +38,7 @@ local eventHandler = {
             -- The alert was active and was not dismissed before a
             -- relog/reload.  Show the alert frame.
 
-            C_Timer.After(0.5, function() namespace.alertFrame:Show() end)
+            C_Timer.After(0.5, function() self:Show() end)
         end
     end,
 
@@ -54,16 +62,14 @@ local eventHandler = {
     ["registerEvents"] = function(self)
         -- Register the events with the frame.
 
-        local frame = namespace.alertFrame
-
         -- `UPDATE_INSTANCE_INFO` fires every time upon entering or leaving an
         -- instance.
 
-        frame:RegisterEvent("ADDON_LOADED")
-        frame:RegisterEvent("UPDATE_INSTANCE_INFO")
-        frame:RegisterEvent("CHALLENGE_MODE_COMPLETED")
+        self:RegisterEvent("ADDON_LOADED")
+        self:RegisterEvent("UPDATE_INSTANCE_INFO")
+        self:RegisterEvent("CHALLENGE_MODE_COMPLETED")
 
-        frame:SetScript(
+        self:SetScript(
             "OnEvent",
             function(_frame, event, ...)
                 self["_" .. event](self, ...)
@@ -72,4 +78,5 @@ local eventHandler = {
     end,
 }
 
-eventHandler:registerEvents()
+Mixin(namespace.alertFrame, EventHandlerMixin)
+namespace.alertFrame:registerEvents()

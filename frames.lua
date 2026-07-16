@@ -76,10 +76,3 @@ alertFrame:SetScript("OnClick", function(self)
     GirlfriendDutyDB.cooldownExpiry = time() + 7200
 end)
 
-alertFrame:SetScript(
-    "OnShow",
-    function(self)
-        GirlfriendDutyDB.alertActive = true
-        PlaySound(8960, "Master")   -- Play ready check sound
-    end
-)
