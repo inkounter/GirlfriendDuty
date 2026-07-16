@@ -6,3 +6,4 @@
 
 frames.lua
 events.lua
+slashCommands.lua
