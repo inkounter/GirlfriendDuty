@@ -52,8 +52,13 @@ local subtitle = alertFrame:CreateFontString(
     "GameFontHighlightSmall"
 )
 subtitle:SetPoint("BOTTOM", alertFrame, "BOTTOM", 0, 12)
-subtitle:SetText("Click to dismiss (2-hour cooldown)")
 subtitle:SetTextColor(0.6, 0.6, 0.6)
+subtitle.updateCooldown = function(self)
+    self:SetFormattedText(
+        "Click to dismiss (%s cooldown)",
+        namespace.formatTime(GirlfriendDutyDB.cooldownDuration)
+    )
+end
 alertFrame.subtitle = subtitle
 
 -- Alert Frame Hover effects
@@ -73,6 +78,9 @@ end)
 alertFrame:SetScript("OnClick", function(self)
     self:Hide()
     GirlfriendDutyDB.alertActive = nil
-    GirlfriendDutyDB.cooldownExpiry = time() + 7200
+    GirlfriendDutyDB.cooldownExpiry = (
+        time() + GirlfriendDutyDB.cooldownDuration * 60
+    )
 end)
 
+alertFrame:SetScript("OnShow", function(self) subtitle:updateCooldown() end)

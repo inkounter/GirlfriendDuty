@@ -34,6 +34,10 @@ local EventHandlerMixin = {
 
         GirlfriendDutyDB = GirlfriendDutyDB or {}
 
+        if GirlfriendDutyDB.cooldownDuration == nil then
+            GirlfriendDutyDB.cooldownDuration = 90
+        end
+
         if GirlfriendDutyDB.alertActive then
             -- The alert was active and was not dismissed before a
             -- relog/reload.  Show the alert frame.

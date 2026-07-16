@@ -51,3 +51,30 @@ LibEditMode:RegisterCallback(
 )
 
 LibEditMode:AddFrame(namespace.alertFrame, onPositionChanged, defaultPosition)
+
+LibEditMode:AddFrameSettings(
+    namespace.alertFrame,
+    {
+        {
+            name = "Cooldown duration",
+
+            kind = LibEditMode.SettingType.Slider,
+
+            default = 90,
+
+            get = function(_layoutName)
+                return GirlfriendDutyDB.cooldownDuration
+            end,
+
+            set = function(_layoutName, value)
+                GirlfriendDutyDB.cooldownDuration = value
+                namespace.alertFrame.subtitle:updateCooldown()
+            end,
+
+            minValue = 10,
+            maxValue = 480,
+            valueStep = 10,
+            formatter = namespace.formatTime,
+        }
+    }
+)
