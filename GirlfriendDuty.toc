@@ -1,0 +1,8 @@
+## Interface: 120007
+## Title: Girlfriend Duty
+## Notes: Alerts "Girlfriend Duty" when leaving M+ runs.
+## SavedVariables: GirlfriendDutyDB
+## Version: 1.0.0
+
+frames.lua
+events.lua
