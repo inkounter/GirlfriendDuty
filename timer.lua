@@ -14,13 +14,24 @@ local function GetTimerText()
     return namespace.formatTime(remainingCooldown / 60)
 end
 
+local updateTimerData
 local timerData = LDB:NewDataObject(
     "GirlfriendDuty",
     {
-        type  = "data source",
-        label = "GFDuty",
-        text  = GetTimerText(),
-        icon  = "interface/icons/inv_valentinesboxofchocolates02.blp",
+        type    = "data source",
+        label   = "GFDuty",
+        text    = GetTimerText(),
+        icon    = "interface/icons/inv_valentinesboxofchocolates02.blp",
+        tooltip = "Click to restart the cooldown.",
+        OnClick = (
+            function()
+                local GirlfriendDutyDB = GirlfriendDutyDB
+                GirlfriendDutyDB.cooldownExpiry = (
+                    time() + GirlfriendDutyDB.cooldownDuration * 60
+                )
+                updateTimerData()
+            end
+        ),
     }
 )
 
@@ -28,7 +39,7 @@ local timerData = LDB:NewDataObject(
 local timerFrame = CreateFrame("Frame")
 local elapsed = 0
 
-local updateTimerData = function()
+updateTimerData = function()
     elapsed = 0
     timerData.text = GetTimerText()
 end
