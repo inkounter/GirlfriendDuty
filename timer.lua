@@ -22,7 +22,6 @@ local timerData = LDB:NewDataObject(
         label   = "GFDuty",
         text    = GetTimerText(),
         icon    = "interface/icons/inv_valentinesboxofchocolates02.blp",
-        tooltip = "Click to restart the cooldown.",
         OnClick = (
             function()
                 local GirlfriendDutyDB = GirlfriendDutyDB
