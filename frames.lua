@@ -81,6 +81,7 @@ alertFrame:SetScript("OnClick", function(self)
     GirlfriendDutyDB.cooldownExpiry = (
         time() + GirlfriendDutyDB.cooldownDuration * 60
     )
+    namespace.updateTimerData()
 end)
 
 alertFrame:SetScript("OnShow", function(self) subtitle:updateCooldown() end)

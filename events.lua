@@ -8,6 +8,7 @@ local EventHandlerMixin = {
     ["fireAlert"] = function(self)
         if not self:IsShown() then
             GirlfriendDutyDB.alertActive = true
+            namespace.updateTimerData()
             PlaySound(8960, "Master")   -- Play ready check sound
             self:Show()
         end

@@ -11,6 +11,7 @@ SlashCmdList["GIRLFRIENDDUTY"] = function(msg)
         GirlfriendDutyDB.cooldownExpiry = 0
         GirlfriendDutyDB.alertActive = nil
         namespace.alertFrame:Hide()
+        namespace.updateTimerData()
         print("|cffFF3377[Girlfriend Duty]|r: Cooldown cleared.")
     else
         print("|cffFF3377[Girlfriend Duty]|r commands:")

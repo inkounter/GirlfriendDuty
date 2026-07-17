@@ -4,11 +4,14 @@
 ## SavedVariables: GirlfriendDutyDB
 ## Version: 1.0.0
 
-libs/LibStub/LibStub.lua
-libs/LibEditMode/embed.xml
+Libs/LibStub/LibStub.lua
+Libs/LibEditMode/embed.xml
+Libs/Ace3/CallbackHandler-1.0/CallbackHandler-1.0.lua
+Libs/LibDataBroker-1.1/LibDataBroker-1.1.lua
 
 util.lua
 frames.lua
 events.lua
 slashCommands.lua
 config.lua
+timer.lua
