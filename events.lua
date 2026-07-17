@@ -9,7 +9,7 @@ local EventHandlerMixin = {
         if not self:IsShown() then
             GirlfriendDutyDB.alertActive = true
             namespace.updateTimerData()
-            PlaySound(8960, "Master")   -- Play ready check sound
+            PlaySound(19138, "Master")
             self:Show()
         end
     end,
