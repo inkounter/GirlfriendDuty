@@ -9,7 +9,7 @@ local EventHandlerMixin = {
         if not self:IsShown() then
             GirlfriendDutyDB.alertActive = true
             namespace.updateTimerData()
-            PlaySound(19138, "Master")
+            C_VoiceChat.SpeakText(0, "kiss your girlfriend", 3, 100)
             self:Show()
         end
     end,
