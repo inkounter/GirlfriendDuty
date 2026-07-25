@@ -17,6 +17,10 @@ local EventHandlerMixin = {
     ["_tryFireAlert"] = function(self)
         -- Show the alert frame if we're not on cooldown.
 
+        if GirlfriendDutyDB.suspend then
+            return
+        end
+
         local cooldownExpiry = GirlfriendDutyDB.cooldownExpiry or 0
 
         if time() < cooldownExpiry then
@@ -64,6 +68,14 @@ local EventHandlerMixin = {
         self:_tryFireAlert()
     end,
 
+    ["_PLAYER_ENTERING_WORLD"] = function(self, isInitialLogin)
+        -- Reset the suspension.
+
+        if isInitialLogin then
+            GirlfriendDutyDB.suspend = false
+        end
+    end,
+
     ["registerEvents"] = function(self)
         -- Register the events with the frame.
 
@@ -73,6 +85,7 @@ local EventHandlerMixin = {
         self:RegisterEvent("ADDON_LOADED")
         self:RegisterEvent("UPDATE_INSTANCE_INFO")
         self:RegisterEvent("CHALLENGE_MODE_COMPLETED")
+        self:RegisterEvent("PLAYER_ENTERING_WORLD")
 
         self:SetScript(
             "OnEvent",

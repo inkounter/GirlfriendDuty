@@ -6,6 +6,10 @@ local LDB = LibStub and LibStub("LibDataBroker-1.1", true)
 
 -- Build the initial text for the broker label.
 local function GetTimerText()
+    if GirlfriendDutyDB.suspend then
+        return "|cffff0000SUSPENDED|r"
+    end
+
     local remainingCooldown = (GirlfriendDutyDB.cooldownExpiry or 0) - time()
     if GirlfriendDutyDB.alertActive or remainingCooldown <= 0 then
         return "|cffff0000DUE|r"
@@ -25,6 +29,7 @@ local timerData = LDB:NewDataObject(
         OnClick = (
             function()
                 local GirlfriendDutyDB = GirlfriendDutyDB
+                GirlfriendDutyDB.suspend = false
                 GirlfriendDutyDB.cooldownExpiry = (
                     time() + GirlfriendDutyDB.cooldownDuration * 60
                 )
