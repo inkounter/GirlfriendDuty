@@ -72,7 +72,7 @@ LibEditMode:AddFrameSettings(
             end,
 
             minValue = 10,
-            maxValue = 480,
+            maxValue = 240,
             valueStep = 10,
             formatter = namespace.formatTime,
         }
