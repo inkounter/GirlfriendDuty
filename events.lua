@@ -62,12 +62,6 @@ local EventHandlerMixin = {
         lastDifficultyId = difficultyId
     end,
 
-    ["_CHALLENGE_MODE_COMPLETED"] = function(self)
-        -- Fire the alert if we are not on cooldown.
-
-        self:_tryFireAlert()
-    end,
-
     ["_PLAYER_ENTERING_WORLD"] = function(self, isInitialLogin)
         -- Reset the suspension.
 
@@ -84,7 +78,6 @@ local EventHandlerMixin = {
 
         self:RegisterEvent("ADDON_LOADED")
         self:RegisterEvent("UPDATE_INSTANCE_INFO")
-        self:RegisterEvent("CHALLENGE_MODE_COMPLETED")
         self:RegisterEvent("PLAYER_ENTERING_WORLD")
 
         self:SetScript(
