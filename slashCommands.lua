@@ -5,18 +5,15 @@ local thisAddonName, namespace = ...
 SLASH_GIRLFRIENDDUTY1 = "/gfd"
 SlashCmdList["GIRLFRIENDDUTY"] = function(msg)
     if msg == "test" or msg == "" then
-        GirlfriendDutyDB.suspend = false
         namespace.alertFrame:fireAlert()
     elseif msg == "clear" then
         GirlfriendDutyDB.cooldownExpiry = 0
         GirlfriendDutyDB.alertActive = nil
-        GirlfriendDutyDB.suspend = false
         namespace.alertFrame:Hide()
         namespace.updateTimerData()
     elseif msg == "suspend" then
-        GirlfriendDutyDB.cooldownExpiry = 0
+        GirlfriendDutyDB.cooldownExpiry = time() + 12 * 3600
         GirlfriendDutyDB.alertActive = nil
-        GirlfriendDutyDB.suspend = true
         namespace.alertFrame:Hide()
         namespace.updateTimerData()
     else
@@ -29,8 +26,8 @@ SlashCmdList["GIRLFRIENDDUTY"] = function(msg)
         else
             print("|cffFF3377[Girlfriend Duty]|r commands:")
             print("  /gfd test - Trigger test alert")
-            print("  /gfd clear - Clear the cooldown and suspension")
-            print("  /gfd suspend - Disable until next login")
+            print("  /gfd clear - Clear the cooldown")
+            print("  /gfd suspend - Set the timer to 12 hours from now")
             print("  /gfd <floatNumber> - Set timer to the specified number of hours, and reset the cooldown")
         end
     end
